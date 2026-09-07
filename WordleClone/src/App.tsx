@@ -1,6 +1,6 @@
 import { useState } from 'react'
-
 import './App.css'
+import styles from './case.module.css'
 import { Case } from './Case'
 
 function App() {
@@ -8,7 +8,9 @@ function App() {
 
   return (
     <>
-      <Case value="a" position={1} color='black'></Case>
+      <div className={styles.case} >
+        <Case value="a" position={0} color='black' answer="a" ></Case>
+      </div>
     </>
   )
 }
