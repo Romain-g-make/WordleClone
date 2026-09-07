@@ -1,0 +1,7 @@
+.case{
+    --case-color:black;
+    color: var(--case-color);
+    border-radius: 10px;
+    border-color: black;
+    border:solid;
+}
