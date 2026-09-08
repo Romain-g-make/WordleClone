@@ -13,11 +13,16 @@ function decoupe(word:string){
 
 export function Case({value,position,color,answer}:CaseProps){
     const answerDec = decoupe(answer)
-    if(answer[position]==value){
-        color="green"
-    }else if (value in answerDec){
-        color = "orange"
-    } else {color= "red"}
+    color= "red"
+    for (let i=0;i<answerDec.length;i++){
+        if (answer[i]==value){
+            color = "orange"
+            if(i==position){
+                color="green"
+                break
+            }
+        }
+    }
     return (
         <div className={styles.case} style={{"--case-color":color}} data-position={position}>
             {value}
