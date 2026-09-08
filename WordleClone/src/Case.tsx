@@ -1,3 +1,5 @@
+import styles from './case.module.css'
+
 interface CaseProps{
     value:string;
     position:number;
@@ -17,7 +19,7 @@ export function Case({value,position,color,answer}:CaseProps){
         color = "orange"
     } else {color= "red"}
     return (
-        <div className="case" style={{"--case-color":color}} data-position={position}>
+        <div className={styles.case} style={{"--case-color":color}} data-position={position}>
             {value}
         </div>
     )

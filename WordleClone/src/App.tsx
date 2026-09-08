@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <div className={styles.case} >
-        <Case value="a" position={0} color='black' answer="a" ></Case>
+        <Case value="a" position={0} color='black' answer="c" ></Case>
       </div>
     </>
   )
