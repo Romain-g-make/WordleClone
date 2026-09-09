@@ -3,8 +3,8 @@ import styles from './grid.module.css'
 interface CaseProps{
     value:string;
     position:number;
-    color:string;
-    answer:string;
+    color: "green"|"grey"|"orange"|"red";
+    answer:string | undefined;
     check:boolean;
 }
 
@@ -13,11 +13,11 @@ function decoupe(word:string){
 }
 
 export function Case({value,position,color,answer,check}:CaseProps){
-    const answerDec = decoupe(answer)
+    const answerDec = decoupe(answer as string)
     if (check){
         color= "red"
         for (let i=0;i<answerDec.length;i++){
-            if (answer[i]==value){
+            if ((answer as string)[i]==value){
                 color = "orange"
                 if(i==position){
                     color="green"
