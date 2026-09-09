@@ -6,7 +6,8 @@ Clone de Wordle développé avec React, TypeScript et Vite. Le joueur compose un
 puis les cases sont colorees selon la position des lettres dans le mot cible.
 
 ## Prerequis
-
+C'est à vous de configurer l'API afin que ça marche nickel chrome.
+Il vous faut configurer l'API WordleAPI en l'installant dans le repo de votre jeu fraîchement récupéré.
 - Node.js et npm
 - Le backend du projet lance sur `http://localhost:3000`
 - Une route `GET /api/word?lang=fr` qui renvoie un objet contenant un mot de 5 lettres
