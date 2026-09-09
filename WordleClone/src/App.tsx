@@ -42,10 +42,10 @@ function App() {
       <Consigne 
         isActive={showRules} onClose={() => setShowRules(false)} />
       <div className={styles.board}>
-        <Row values={["o", "o", "o", "o", "o"]} check={false} answer={data?.word}/>
-        <Row values={["t", "r", "u", "o", "a"]} check={false} answer={data?.word} />
-        <Row values={["c", "r", "o", "u", "e"]} check={false} answer={data?.word} />
-        <Row values={["t", "r", "o", "u", "e"]} check={false} answer={data?.word} />
+        <Row values={["", "", "", "", ""]} check={false} answer={data?.word}/>
+        <Row values={["", "", "", "", ""]} check={false} answer={data?.word} />
+        <Row values={["", "", "", "", ""]} check={false} answer={data?.word} />
+        <Row values={["", "", "", "", ""]} check={false} answer={data?.word} />
         <Row values={["", "", "", "", ""]} check={false} answer={data?.word} />
       </div>
     </>
