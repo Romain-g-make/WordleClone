@@ -105,6 +105,11 @@ function App() {
 				isActive={showRules}
 				onClose={() => setShowRules(false)}
 			/>
+			<Victoire
+        		isActive={showVictory}
+        		onClose={() => setShowVictory(false)}
+        		mot={data?.word ?? ""}
+      		/>
 			<div className={styles.board}>
 				{Array.from({ length: NOMBRE_ESSAIS }, (_, index) => (
 					<Row
