@@ -1,4 +1,4 @@
-import styles from './grid.module.css';
+import styles from './clavier.module.css';
 
 interface ToucheProps {
   lettre: string;

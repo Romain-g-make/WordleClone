@@ -1,34 +1,24 @@
 import styles from './grid.module.css'
 
-interface CaseProps{
-    value:string;
-    position:number;
-    color:string;
-    answer:string;
-    check:boolean;
+interface CaseProps {
+    value: string;
+    position: number;
+    answer: string;
+    check: boolean;
 }
 
-function decoupe(word:string){
-    return [...word]
-}
+export function Case({ value, position, answer, check }: CaseProps) {
+    let color = 'white'
 
-export function Case({value,position,color,answer,check}:CaseProps){
-    const answerDec = decoupe(answer)
-    if (check){
-        color= "red"
-        for (let i=0;i<answerDec.length;i++){
-            if (answer[i]==value){
-                color = "orange"
-                if(i==position){
-                    color="green"
-                    break
-                }
-            }
-        }
+    if (check) {
+        color = answer[position] === value ? '#6aaa64' : answer.includes(value) ? '#c9b458' : '#787c7e'
     }
+
+    const caseStyle = { '--case-color': color } as React.CSSProperties
+
     return (
-        <div className={styles.case} style={{"--case-color":color}} data-position={position}>
-            {value}
+        <div className={styles.case} style={caseStyle} data-position={position}>
+            {value.toUpperCase()}
         </div>
     )
 }

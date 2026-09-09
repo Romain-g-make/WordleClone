@@ -1,49 +1,59 @@
-import { useState } from "react";
-import { Touche } from "./Touche";
+import styles from './clavier.module.css';
+import { Touche } from './Touche';
 
-const LIGNE_AZERTY = ["A", "Z", "E", "R", "T", "Y", "U", "I", "O", "P","suppr" ];
-const LIGNE_AZERTY2 = ["Q", "S", "D", "F", "G", "H", "J", "K", "L", "M","Entrée"];
-const LIGNE_AZERTY3 = ["W", "X", "C", "V", "B", "N"];
+interface ClavierProps {
+  onToucheClick: (lettre: string) => void;
+  onSupprimer: () => void;
+  onEntree: () => void;
+}
 
-export const Clavier = ({ onToucheClick }: { onToucheClick: (lettre: string) => void }) => {
-  const [lettreChoisie, setLettreChoisie] = useState<string>("");
+const LIGNE_AZERTY = ['A', 'Z', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'];
+const LIGNE_AZERTY2 = ['Q', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M'];
+const LIGNE_AZERTY3 = ['W', 'X', 'C', 'V', 'B', 'N'];
 
-  const gererClic = (lettre: string) => {
-    setLettreChoisie(lettre);
-    onToucheClick(lettre);
-  };
-
+export const Clavier = ({ onToucheClick, onSupprimer, onEntree }: ClavierProps) => {
   return (
-    <div>
-      <div style={{ display: "flex", gap: "6px" }}>
+    <div className={styles.clavier}>
+      {/* Rangée de lettres */}
+      <div className={styles.ligne}>
         {LIGNE_AZERTY.map((caractere) => (
           <Touche
             key={caractere}
             lettre={caractere}
-            onClick={gererClic}
-            desactive={lettreChoisie === caractere}
+            onClick={onToucheClick}
           />
         ))}
       </div>
-      <div style={{ display: "flex", gap: "6px" }}>
+
+      <div className={styles.ligne}>
         {LIGNE_AZERTY2.map((caractere) => (
-          <Touche
-            key={caractere}
-            lettre={caractere}
-            onClick={gererClic}
-            desactive={lettreChoisie === caractere}
-          />
+          <Touche key={caractere} lettre={caractere} onClick={onToucheClick} />
         ))}
       </div>
-      <div style={{ display: "flex", gap: "6px" }}>
+
+      <div className={styles.ligne}>
         {LIGNE_AZERTY3.map((caractere) => (
-          <Touche
-            key={caractere}
-            lettre={caractere}
-            onClick={gererClic}
-            desactive={lettreChoisie === caractere}
-          />
+          <Touche key={caractere} lettre={caractere} onClick={onToucheClick} />
         ))}
+      </div>
+
+      {/* Rangée des boutons d'action */}
+      <div className={styles.ligne}>
+        <button
+          type="button"
+          className={styles.toucheAction}
+          onClick={onEntree}
+        >
+          Entrée
+        </button>
+
+        <button
+          type="button"
+          className={styles.toucheAction}
+          onClick={onSupprimer}
+        >
+          ⌫
+        </button>
       </div>
     </div>
   );
