@@ -62,6 +62,12 @@
     background-color: #bbbfc4;
 }
 
+.touche:disabled {
+    background-color: #565758;
+    color: #9a9a9a;
+    cursor: not-allowed;
+}
+
 .touche:active:not(:disabled),
 .toucheAction:active:not(:disabled) {
     transform: scale(0.95);

@@ -3,7 +3,8 @@ import styles from "./grid.module.css";
 import { Row } from "./Row";
 import { Consigne } from "./Consigne";
 import { Clavier } from "./Clavier";
-
+import { Victoire } from "./Victoire";
+  
 const TAILLE_MAX = 5;
 const NOMBRE_ESSAIS = 6;
 
@@ -20,14 +21,22 @@ function App() {
 	const [data, setData] = useState<WordData | null>(null);
 	const [motEnCours, setMotEnCours] = useState<string>("");
 	const [motsValides, setMotsValides] = useState<string[]>([]);
+	const [lettresAbsentes, setLettresAbsentes] = useState<Set<string>>(
+		new Set(),
+	);
+	const [showRules, setShowRules] = useState(true);
+	const [showVictory, setShowVictory] = useState(false);
 
 	const ajouterLettre = useCallback((lettre: string) => {
-		if (motEnCours.length < TAILLE_MAX) {
+		if (
+			motEnCours.length < TAILLE_MAX &&
+			!lettresAbsentes.has(lettre.toLowerCase())
+		) {
 			setMotEnCours((prev) =>
 				(prev + lettre.toLowerCase()).slice(0, TAILLE_MAX)
 			);
 		}
-	}, [motEnCours.length]);
+	}, [lettresAbsentes, motEnCours.length]);
 
 	const supprimerLettre = useCallback(() => {
 		setMotEnCours((prev) => prev.slice(0, -1));
@@ -42,8 +51,21 @@ function App() {
 		}
 
 		setMotsValides((prev) => [...prev, motEnCours]);
+		if (data?.word) {
+			const lettresAbsentesDeLEssai = new Set(
+				[...motEnCours.toLowerCase()].filter(
+					(lettre) => !data.word.toLowerCase().includes(lettre),
+				),
+			);
+			setLettresAbsentes((prev) =>
+				new Set([...prev, ...lettresAbsentesDeLEssai]),
+			);
+		}
+		if (data?.word && motEnCours.toLowerCase() === data.word.toLowerCase()) {
+			setShowVictory(true);
+		}
 		setMotEnCours("");
-	}, [motEnCours, motsValides.length]);
+	}, [data?.word, motEnCours, motsValides.length]);
 
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
@@ -96,8 +118,6 @@ function App() {
 
 		fetchData();
 	}, []);
-	const [showRules, setShowRules] = useState(true);
-
 	return (
 		<>
 			<button onClick={() => setShowRules(true)}>Règles du jeu</button>
@@ -128,6 +148,7 @@ function App() {
 				onToucheClick={ajouterLettre}
 				onSupprimer={supprimerLettre}
 				onEntree={validerMot}
+				lettresAbsentes={lettresAbsentes}
 			/>
 		</>
 	);

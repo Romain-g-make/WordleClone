@@ -6,10 +6,6 @@ interface CaseProps{
     color: "green"|"grey"|"orange"|"red";
 }
 
-function decoupe(word :string){
-    return [...word]
-}
-
 export function Case({value,position,color}:CaseProps){
 
     const caseStyle = { '--case-color': color } as React.CSSProperties
