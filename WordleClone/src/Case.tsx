@@ -13,14 +13,14 @@ function decoupe(word:string){
 }
 
 export function Case({value,position,color,answer,check}:CaseProps){
-    const answerDec = decoupe(answer as string)
-    if (check){
-        color= "red"
-        for (let i=0;i<answerDec.length;i++){
-            if ((answer as string)[i]==value){
+    if (check && answer) {
+        const answerDec = decoupe(answer as string)
+        color = "red"
+        for (let i = 0; i < answerDec.length; i++) {
+            if (answer[i] === value) {
                 color = "orange"
-                if(i==position){
-                    color="green"
+                if (i === position) {
+                    color = "green"
                     break
                 }
             }

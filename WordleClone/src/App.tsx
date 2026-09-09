@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import styles from "./grid.module.css";
 import { Row } from "./Row";
+import { Consigne } from "./Consigne";
 
 interface WordData {
   word: string;
@@ -32,9 +33,14 @@ function App() {
 
     fetchData();
   }, []);
+  const [showRules, setShowRules] = useState(true);
 
-  return (
+  return (  
     <>
+      <button onClick={() => setShowRules(true)}>Règles du jeu</button>
+
+      <Consigne 
+        isActive={showRules} onClose={() => setShowRules(false)} />
       <div className={styles.board}>
         <Row values={["o", "o", "o", "o", "o"]} check={true} answer={data?.word}/>
         <Row values={["t", "r", "u", "o", "a"]} check={true} answer={data?.word} />
