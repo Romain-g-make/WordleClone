@@ -8,7 +8,7 @@ interface CaseProps{
     check:boolean;
 }
 
-function decoupe(word:string){
+function decoupe(word :string){
     return [...word]
 }
 
@@ -26,9 +26,12 @@ export function Case({value,position,color,answer,check}:CaseProps){
             }
         }
     }
+
+    const caseStyle = { '--case-color': color } as React.CSSProperties
+
     return (
-        <div className={styles.case} style={{"--case-color":color}} data-position={position}>
-            {value}
+        <div className={styles.case} style={caseStyle} data-position={position}>
+            {value.toUpperCase()}
         </div>
     )
 }
