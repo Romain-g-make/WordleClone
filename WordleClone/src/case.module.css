@@ -1,8 +1,0 @@
-.case{
-    --case-color:black;
-    color: var(--case-color);
-    border-radius: 10px;
-    border-color: rgb(215, 51, 51);
-    border:solid;
-    background-color: rgb(166, 173, 182);
-}
