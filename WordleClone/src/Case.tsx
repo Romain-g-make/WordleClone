@@ -3,7 +3,7 @@ import styles from './grid.module.css'
 interface CaseProps{
     value:string;
     position:number;
-    color: "green"|"grey"|"orange"|"red";
+    color?: "green"|"grey"|"orange"|"red";
     answer:string | undefined;
     check:boolean;
 }

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import styles from "./grid.module.css";
 import { Row } from "./Row";
 import { Consigne } from "./Consigne";
+import { Victoire } from "./Victoire";
 import { Clavier } from "./Clavier"
 
 const TAILLE_MAX = 5;
@@ -20,23 +20,34 @@ function App() {
   const [data, setData] = useState<WordData | null>(null);
   const [motEnCours, setMotEnCours] = useState<string>("");
   const [motsValides, setMotsValides] = useState<string[]>([]);
+  const [showVictory, setShowVictory] = useState(false);
 
   const ajouterLettre = (lettre: string) => {
-    if (motEnCours.length < TAILLE_MAX) {
+    if (!showVictory && motEnCours.length < TAILLE_MAX) {
       setMotEnCours((prev) => prev + lettre.toLowerCase());
     }
   };
 
   const supprimerLettre = () => {
-    setMotEnCours((prev) => prev.slice(0, -1));
+    if (!showVictory) {
+      setMotEnCours((prev) => prev.slice(0, -1));
+    }
   };
 
   const validerMot = () => {
-    if (motEnCours.length !== TAILLE_MAX || motsValides.length >= NOMBRE_ESSAIS) {
+    if (
+      showVictory ||
+      motEnCours.length !== TAILLE_MAX ||
+      motsValides.length >= NOMBRE_ESSAIS ||
+      !data?.word
+    ) {
       return;
     }
 
     setMotsValides((prev) => [...prev, motEnCours]);
+    if (motEnCours === data.word.toLowerCase()) {
+      setShowVictory(true);
+    }
     setMotEnCours("");
   };
 
@@ -70,6 +81,11 @@ function App() {
       <button onClick={() => setShowRules(true)}>Règles du jeu</button>
       <Consigne 
         isActive={showRules} onClose={() => setShowRules(false)} />
+      <Victoire
+        isActive={showVictory}
+        onClose={() => setShowVictory(false)}
+        mot={data?.word ?? ""}
+      />
       <div className={styles.board}>
         {Array.from({ length: NOMBRE_ESSAIS }, (_, index) => (
           <Row

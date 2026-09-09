@@ -1,4 +1,4 @@
-import styles from './clavier.module.css';
+import styles from './Clavier.module.css';
 import { Touche } from './Touche';
 
 interface ClavierProps {

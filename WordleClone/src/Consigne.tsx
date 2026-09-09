@@ -56,7 +56,7 @@ export function Consigne({ isActive, onClose }: ConsigneProps) {
                 <p>La lettre <strong>O</strong> n'est pas dans le mot secret.</p>
             </div>
             <button className={stylesConsigne.closeButton} onClick={onClose}>
-                Fermer les règles
+                Bien compris !
             </button>
         </div>
         
